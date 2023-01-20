@@ -8,11 +8,6 @@ import { getStatsigEnv } from './lib/getStatsigEnv';
 const UID_COOKIE = 'uid';
 // This is the experiment that will be used to determine the bucket
 const EXPERIMENT = 'redirect';
-const BUCKET_PARAM = 'bucket';
-// Default Experiment Group Fallback
-const GROUP_PARAM_FALLBACK = 'fallback';
-
-const env = process.env.VERCEL_ENV;
 
 // We'll use this to validate a random UUID
 const IS_UUID = /^[0-9a-f-]+$/i;
