@@ -1,5 +1,8 @@
 import { demos } from '#/lib/demos';
 import Link from 'next/link';
+import { useEffect } from 'react';
+// import { Statsig } from 'statsig-react';
+import { StatsigPageView } from './StatsigProvider';
 
 export default function Page() {
   return (
@@ -39,6 +42,7 @@ export default function Page() {
           );
         })}
       </div>
+      <StatsigPageView />
     </div>
   );
 }
