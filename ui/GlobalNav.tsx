@@ -16,7 +16,7 @@ export function GlobalNav() {
     <div className="fixed top-0 z-10 flex w-full flex-col border-b border-gray-800 bg-black lg:bottom-0 lg:z-auto lg:w-72 lg:border-r lg:border-gray-800">
       <div className="flex h-14 items-center py-4 px-4 lg:h-auto">
         <Link
-          href="/"
+          href="/examples"
           className="group flex w-full items-center gap-x-2.5"
           onClick={close}
         >
@@ -85,7 +85,7 @@ function GlobalNavItem({
   return (
     <Link
       onClick={close}
-      href={`/${item.slug}`}
+      href={`/examples/${item.slug}`}
       className={clsx(
         'block rounded-md px-3 py-2 text-sm font-medium hover:text-gray-300',
         {

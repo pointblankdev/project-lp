@@ -32,15 +32,18 @@ export async function middleware(req: NextRequest) {
   }
 
   await Statsig.initialize(process.env.STATSIG_SERVER_API_KEY!, {
-    dataAdapter: dataAdapter,
+    dataAdapter: getStatsigEnv() !== 'development' ? dataAdapter : null, // bug workaround
     environment: { tier: getStatsigEnv() },
   });
+
+  const values = Statsig.getClientInitializeResponse({ userID: userId })!;
 
   const experiment = await Statsig.getExperiment(
     { userID: userId },
     EXPERIMENT,
   );
 
+  console.log(experiment);
   // Clone the URL and change its pathname to point to a bucket
   const url = req.nextUrl.clone();
 
@@ -53,6 +56,9 @@ export async function middleware(req: NextRequest) {
   if (!hasUserId) {
     res.cookies.set(UID_COOKIE, userId, {
       maxAge: 60 * 60 * 24, // identify users for 24 hours
+    });
+    res.cookies.set('sscfg', JSON.stringify(values), {
+      maxAge: 60 * 60 * 24, // store config for 24 hours
     });
   }
 
